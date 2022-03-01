@@ -1,0 +1,46 @@
+version: "3.7"
+
+services:
+  frontend:
+    container_name: frontend
+    build:
+      context: "./hartley_react"
+      dockerfile: Dockerfile
+    volumes:
+      - "./hartley_react:/app"
+      - "/app/node_modules"
+    ports:
+      - 3000:3000
+    stdin_open: true
+    environment:
+      - CHOKIDAR_USEPOLLING=true
+    command: npm start
+
+  php:
+    build:
+      context: "./dockerfiles/php-img/"
+    ports:
+      - "80:80"
+    volumes:
+      - ./src:/var/www/html/
+
+  db:
+    image: mysql
+    command: --default-authentication-plugin=mysql_native_password
+    restart: always
+    environment:
+      MYSQL_ROOT_PASSWORD: example
+      MYSQL_DATABASE: userdb
+      MYSQL_USER: my_user
+      MYSQL_PASSWORD: my_password
+    volumes:
+      - ./mysqldata:/var/lib/mysql
+
+  adminer:
+    image: adminer
+    restart: always
+    ports:
+      - 8080:8080
+
+volumes:
+  my-mysqldata:
