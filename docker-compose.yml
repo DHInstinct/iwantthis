@@ -17,6 +17,7 @@ services:
     command: npm start
 
   php:
+    container_name: php
     build:
       context: "./dockerfiles/php-img/"
     ports:
@@ -25,6 +26,7 @@ services:
       - ./src:/var/www/html/
 
   db:
+    container_name: db
     image: mysql
     command: --default-authentication-plugin=mysql_native_password
     restart: always
@@ -37,6 +39,9 @@ services:
       - ./mysqldata:/var/lib/mysql
 
   adminer:
+    container_name: adminer
+    depends_on:
+      - db
     image: adminer
     restart: always
     ports:
@@ -44,3 +49,4 @@ services:
 
 volumes:
   my-mysqldata:
+  frontend:
