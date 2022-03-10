@@ -1,7 +1,7 @@
 export default function Navbar(props)
 {
     return(
-        <nav className="flex items-center justify-between flex-wrap bg-teal-500 p-6">
+        <nav className="flex items-center justify-between flex-wrap bg-indigo-600 p-6">
           <div className="flex items-center flex-shrink-0 text-white mr-6">
               <img className='object-contain h-10 w-10' src='./public/logo192.png'></img>
             <span className="font-semibold text-2xl tracking-tight pl-5">I WANT THIS</span>
@@ -13,18 +13,18 @@ export default function Navbar(props)
           </div>
           <div className="w-full block flex-grow lg:flex lg:items-center lg:w-auto">
             <div className="text-xl lg:flex-grow">
-              <a href="#responsive-header" className="block mt-4 lg:inline-block lg:mt-0 text-teal-200 hover:text-white mr-4">
-                Docs
+              <a href="#responsive-header" className="block mt-4 lg:inline-block lg:mt-0 text-indigo-200 hover:text-white mr-4">
+                Products
               </a>
-              <a href="#responsive-header" className="block mt-4 lg:inline-block lg:mt-0 text-teal-200 hover:text-white mr-4">
-                Examples
+              <a href="#responsive-header" className="block mt-4 lg:inline-block lg:mt-0 text-indigo-200 hover:text-white mr-4">
+                Account
               </a>
-              <a href="#responsive-header" className="block mt-4 lg:inline-block lg:mt-0 text-teal-200 hover:text-white">
-                Blog
+              <a href="#responsive-header" className="block mt-4 lg:inline-block lg:mt-0 text-indigo-200 hover:text-white">
+                Wishlist
               </a>
             </div>
             <div>
-              <a href="#" className="inline-block text-sm px-4 py-2 leading-none border rounded text-white border-white hover:border-transparent hover:text-teal-500 hover:bg-white mt-4 lg:mt-0">Download</a>
+              {/* <a href="#" className="inline-block text-sm px-4 py-2 leading-none border rounded text-white border-white hover:border-transparent hover:text-teal-500 hover:bg-white mt-4 lg:mt-0">Download</a> */}
             </div>
           </div>
         </nav>

@@ -1,3 +1,4 @@
+import Carousel from "./components/carousel";
 import Navbar from "./components/nav";
 
 function App() {
@@ -6,11 +7,8 @@ function App() {
     <div className="App">
     
     <Navbar />
-     <div>
-        <h1 className="text-3xl font-bold underline">
-          Hello world!
-        </h1>
-     </div>
+     
+    <Carousel />
         
        
     </div>
