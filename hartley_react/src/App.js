@@ -6,6 +6,11 @@ import Home from './components/Home';
 import Navbar from "./components/Navigation";
 import ProductList from './components/product-list';
 import Footer from './components/Footer';
+import Login from './components/Login';
+import Signup from './components/Signup';
+import Admin from './components/Admin';
+import WishList from './components/Wishlist';
+
 import {
   BrowserRouter as Router,
   Switch,
@@ -20,13 +25,15 @@ function App() {
       <div className="App">
 
         <Navbar />
-        <Router>
-          <Routes>
-            <Route path='/' element={<Home />} />
-            <Route path='/productlist' element={<ProductList />} />
-            <Route path='/Carousel' element={<Carousel />} />
-          </Routes>
-        </Router>
+        <Routes>
+          <Route path='/' element={<Home />} />
+          <Route path='/productlist' element={<ProductList />} />
+          <Route path='/carousel' element={<Carousel />} />
+          <Route path='/login' element={<Login />} />
+          <Route path='/signup' element={<Signup />} />
+          <Route path='/admin' element={<Admin />} />
+          <Route path='/wishlist' element={<WishList />} />
+        </Routes>
 
         <br />
         <br />
@@ -36,11 +43,6 @@ function App() {
         <br />
         <br />
         <br />
-        <br />
-        <br />
-        <br />
-        <br />
-
         <Footer />
 
       </div>
