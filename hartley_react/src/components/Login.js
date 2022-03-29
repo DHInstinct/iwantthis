@@ -8,12 +8,40 @@ export default function Login() {
     const [username, SetUsername] = useState("");
     const [password, SetPassword] = useState("");
 
+    const [loginStatus, SetLoginStatus] = useState("");
+
+    function HandleSubmit(e) {
+
+        e.preventDefault();
+        const loginObj = {
+            'username': username,
+            'password': password
+        }
+
+        axios
+            .post("http://localhost:80/login.php", loginObj)
+            .then(response => {
+                if (response.data.message) {
+                    SetLoginStatus(response.data.message);
+                    console.log("login Status:", loginStatus);
+                }
+                else {
+                    console.log(response);
+                    SetLoginStatus("Successful Login");
+                }
+            })
+            .catch(function (error) {
+                console.log("axios error in login", error)
+            });
+
+    }
+
     return (
         <div className="bg-grey-lighter min-h-screen flex flex-col">
             <div className="container max-w-sm mx-auto flex-1 flex flex-col items-center justify-center px-2">
                 <div className="bg-white px-6 py-8 rounded shadow-md text-black w-full">
                     <h1 className="mb-8 text-3xl text-center">Sign In</h1>
-                    <form id="login" onSubmit={(e) => HandleSubmit(e, username, password)}>
+                    <form id="login" onSubmit={(e) => HandleSubmit(e)}>
 
                         <input
                             type="text"
@@ -46,31 +74,44 @@ export default function Login() {
                         Sign up
                     </Link>.
                 </div>
+                <div className="container mx-auto">
+                    <h1 className="font-medium leading-tight text-5xl mt-0 mb-2">
+                        {loginStatus}
+                    </h1>
+                </div>
             </div>
         </div >
     );
-}
 
-function HandleSubmit(e, username, password) {
-
-    e.preventDefault();
-    const loginObj = {
-        'username': username,
-        'password': password
-    }
-
-    console.log(loginObj);
-
-    axios
-        .post("http://localhost:80/login.php", loginObj)
-        .then(response => {
-            console.log(response);
-        })
-        .catch(function (error) {
-            console.log(error)
-        });
-
-    // let name = { "Name": 'Daniel' };
-    // console.log(name)
 
 }
+
+// function HandleSubmit(e, username, password, loginStatus) {
+
+//     e.preventDefault();
+//     const loginObj = {
+//         'username': username,
+//         'password': password
+//     }
+
+//     // console.log(loginObj);
+
+//     axios
+//         .post("http://localhost:80/login.php", loginObj)
+//         .then(response => {
+//             console.log(response.data.message);
+//             if (response.data.message) {
+//                 console.log("hi");
+//                 loginStatus => SetLoginStatus("hi");
+//                 // SetLoginStatus(response.data.message);
+//                 console.log("login Status:", loginStatus);
+//             }
+//             else {
+//                 // SetLoginStatus
+//             }
+//         })
+//         .catch(function (error) {
+//             console.log("axios error in login", error)
+//         });
+
+// }
