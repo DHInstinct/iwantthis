@@ -4,6 +4,9 @@ import axios from 'axios'
 
 export default function Signup() {
 
+    localStorage.setItem("test", "testingvalue");
+
+
     const [firstName, SetFirstName] = useState("");
     const [lastName, SetLastName] = useState("");
     const [email, SetEmail] = useState("");
@@ -30,11 +33,11 @@ export default function Signup() {
             .post("http://localhost:80/signup.php", signupObj)
             .then(response => {
                 if (response.data.message) {
-                    SetSignup(response.data.message);
                     console.log("login Status:", signup);
+                    SetSignup(response.data.message);
                 }
                 else {
-                    console.log(response);
+                    console.log(response.data.fname);
                     SetSignup("Successful Login");
                 }
             })

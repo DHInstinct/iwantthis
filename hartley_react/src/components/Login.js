@@ -2,7 +2,6 @@ import { Link } from "react-router-dom";
 import React, { Component, useState } from 'react'
 import axios from 'axios'
 
-
 export default function Login() {
 
     const [username, SetUsername] = useState("");
@@ -26,7 +25,8 @@ export default function Login() {
                     console.log("login Status:", loginStatus);
                 }
                 else {
-                    console.log(response);
+                    localStorage.setItem("name", response.data[0].fname);
+                    localStorage.setItem("id", response.data[0].id);
                     SetLoginStatus("Successful Login");
                 }
             })

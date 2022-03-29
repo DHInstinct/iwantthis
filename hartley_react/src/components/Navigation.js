@@ -6,6 +6,8 @@ import Home from "./Home";
 
 export default function Navbar(props) {
 
+  let name = localStorage.getItem("name");
+
   return (
     <nav className="flex items-center justify-between flex-wrap bg-indigo-600 p-6">
       <div className="flex items-center flex-shrink-0 text-white mr-6">
@@ -29,7 +31,8 @@ export default function Navbar(props) {
           <Link path="/Carousel" className="block mt-4 lg:inline-block lg:mt-0 text-indigo-200 hover:text-white mr-4" >Carousel</Link> */}
         </div>
         <div>
-          {/* <a href="#" className="inline-block text-sm px-4 py-2 leading-none border rounded text-white border-white hover:border-transparent hover:text-teal-500 hover:bg-white mt-4 lg:mt-0">Download</a> */}
+        Hello, {name}
+          <a href="#" className="inline-block text-sm px-4 py-2 leading-none border rounded text-white border-white hover:border-transparent hover:text-teal-500 hover:bg-white mt-4 lg:mt-0">Logout</a>
         </div>
       </div>
     </nav>
