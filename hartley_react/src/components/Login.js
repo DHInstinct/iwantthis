@@ -1,5 +1,5 @@
 import { Link } from "react-router-dom";
-import React, { Component, useState } from 'react'
+import React, { Component, useEffect, useState } from 'react'
 import axios from 'axios'
 
 export default function Login() {
@@ -21,11 +21,12 @@ export default function Login() {
             .post("http://localhost:80/login.php", loginObj)
             .then(response => {
                 if (response.data.message) {
+
                     SetLoginStatus(response.data.message);
                     console.log("login Status:", loginStatus);
                 }
                 else {
-                    localStorage.setItem("name", response.data[0].fname);
+                    localStorage.setItem("userName", response.data[0].fname);
                     localStorage.setItem("id", response.data[0].id);
                     SetLoginStatus("Successful Login");
                 }
@@ -49,7 +50,8 @@ export default function Login() {
                             id="email"
                             placeholder="Email"
                             onChange={username => SetUsername(username.target.value)}
-                            value={username} />
+                            value={username}
+                            required />
 
                         <input
                             type="password"
@@ -57,7 +59,8 @@ export default function Login() {
                             id="password"
                             placeholder="Password"
                             onChange={password => SetPassword(password.target.value)}
-                            value={password} />
+                            value={password}
+                            required />
 
                         <div className="mx-auto text-center">
                             <input

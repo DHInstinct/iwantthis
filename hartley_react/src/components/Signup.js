@@ -14,12 +14,8 @@ export default function Signup() {
 
     const [signup, SetSignup] = useState("");
 
-    console.log(firstName);
-    console.log(lastName);
-    console.log(email);
-    console.log(password);
-
     function HandleSubmit(e) {
+
 
         e.preventDefault();
         const signupObj = {
@@ -29,16 +25,18 @@ export default function Signup() {
             'password': password
         }
 
+        console.log(signupObj);
+
         axios
             .post("http://localhost:80/signup.php", signupObj)
             .then(response => {
-                if (response.data.message) {
-                    console.log("login Status:", signup);
-                    SetSignup(response.data.message);
+                if (response.data == true) {
+                    SetSignup(firstName);
+                    localStorage.setItem("userName", firstName);
+
                 }
                 else {
-                    console.log(response.data.fname);
-                    SetSignup("Successful Login");
+                    SetSignup("Please try again");
                 }
             })
             .catch(function (error) {
@@ -52,20 +50,23 @@ export default function Signup() {
             <div className="container max-w-sm mx-auto flex-1 flex flex-col items-center justify-center px-2">
                 <div className="bg-white px-6 py-8 rounded shadow-md text-black w-full">
                     <h1 className="mb-8 text-3xl text-center">Sign up</h1>
-                    <form id="">
+                    <form id="" onSubmit={(e) => HandleSubmit(e)}>
                         <input
                             type="text"
                             className="block border border-grey-light w-full p-3 rounded mb-4"
                             id="fullname"
                             placeholder="Full Name"
                             // value={firstName}
-                            onChange={firstName => SetFirstName(firstName.target.value)} />
+                            onChange={firstName => SetFirstName(firstName.target.value)}
+                            required
+                        />
 
                         <input
                             type="text"
                             className="block border border-grey-light w-full p-3 rounded mb-4"
                             placeholder="Last Name"
                             onChange={lastName => SetLastName(lastName.target.value)}
+                            required
                         />
 
                         <input
@@ -74,14 +75,16 @@ export default function Signup() {
                             name="email"
                             placeholder="Email"
                             // value={email}
-                            onChange={email => SetEmail(email.target.value)} />
+                            onChange={email => SetEmail(email.target.value)}
+                            required />
 
                         <input
                             type="password"
                             className="block border border-grey-light w-full p-3 rounded mb-4"
                             name="password"
                             placeholder="Password"
-                            onChange={password => SetPassword(password.target.value)} />
+                            onChange={password => SetPassword(password.target.value)}
+                            required />
 
 
                         <div className="mx-auto text-center">
@@ -109,6 +112,7 @@ export default function Signup() {
                         Log in
                     </Link>.
                 </div>
+                <div><h1 className="text-5xl">{signup}</h1></div>
             </div>
         </div>
     );

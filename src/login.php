@@ -1,5 +1,4 @@
 <?php
-session_start();
 // require_once("config.php");
 require_once("config/config.php");
 
@@ -32,8 +31,8 @@ if(isset($request) && !empty($request)){
 
         }
 
-        $_SESSION['userloginname'] = $users[0]['u_fname'];
-        $_SESSION['userid'] = $users[0]['u_id'];
+        // $_SESSION['userloginname'] = $users[0]['u_fname'];
+        // $_SESSION['userid'] = $users[0]['u_id'];
         echo json_encode($users);
 
     }

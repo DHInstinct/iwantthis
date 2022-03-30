@@ -3,7 +3,6 @@
 cors();
 
 // ** MySQL settings - You can get this info from your web host ** //
-/** The name of the database for WordPress */
 define( 'DB_NAME', 'iwantthis' );
 /** MySQL database username */
 define( 'DB_USER', 'dhinstinct' );
@@ -44,6 +43,7 @@ function cors()
         // you want to allow, and if so:
         header("Access-Control-Allow-Origin: {$_SERVER['HTTP_ORIGIN']}");
         header('Access-Control-Allow-Credentials: true');
+        header('Access-Control-Allow-Methods: GET, PUT, POST, DELETE, OPTIONS');
         header('Access-Control-Max-Age: 86400');    // cache for 1 day
     }
 

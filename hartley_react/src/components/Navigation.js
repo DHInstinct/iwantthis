@@ -3,10 +3,29 @@ import {
 } from "react-router-dom";
 import Home from "./Home";
 
+import React, { Component, useState, useEffect } from 'react'
+import axios from "axios";
+
 
 export default function Navbar(props) {
 
-  let name = localStorage.getItem("name");
+  const [name, SetName] = useState("");
+
+  // SetName(localStorage.getItem("userName"));
+  //^ this doesn't work
+
+  useEffect(() => {
+    //set the name when the component reloads.
+    SetName(localStorage.getItem("userName"));
+  });
+
+  function Logout(e) {
+    e.preventDefault();
+    console.log("Logout'd");
+    SetName("");
+    localStorage.clear();
+  }
+
 
   return (
     <nav className="flex items-center justify-between flex-wrap bg-indigo-600 p-6">
@@ -30,12 +49,15 @@ export default function Navbar(props) {
           <Link path="/productlist" className="block mt-4 lg:inline-block lg:mt-0 text-indigo-200 hover:text-white mr-4" >Product List</Link>
           <Link path="/Carousel" className="block mt-4 lg:inline-block lg:mt-0 text-indigo-200 hover:text-white mr-4" >Carousel</Link> */}
         </div>
-        <div>
-        Hello, {name}
-          <a href="#" className="inline-block text-sm px-4 py-2 leading-none border rounded text-white border-white hover:border-transparent hover:text-teal-500 hover:bg-white mt-4 lg:mt-0">Logout</a>
+        <div className="p-4">
+          <h4 className="font-medium text-lg text-white">
+            Hello, {name}
+          </h4>
         </div>
+        <button onClick={(e) => Logout(e)} href="#" className="inline-block text-sm px-4 py-2 leading-none border rounded text-white border-white hover:border-transparent hover:text-teal-500 hover:bg-white mt-4 lg:mt-0">Logout</button>
       </div>
     </nav>
 
   )
 }
+
