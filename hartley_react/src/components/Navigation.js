@@ -1,18 +1,14 @@
 import {
-  Link
+  Link, useNavigate
 } from "react-router-dom";
 import Home from "./Home";
 
 import React, { Component, useState, useEffect } from 'react'
 import axios from "axios";
 
+export default function Navbar({ name, SetName }) {
 
-export default function Navbar(props) {
-
-  const [name, SetName] = useState("");
-
-  // SetName(localStorage.getItem("userName"));
-  //^ this doesn't work
+  let navigate = useNavigate();
 
   useEffect(() => {
     //set the name when the component reloads.
@@ -21,9 +17,11 @@ export default function Navbar(props) {
 
   function Logout(e) {
     e.preventDefault();
-    console.log("Logout'd");
+    //clear state and localstorage
     SetName("");
     localStorage.clear();
+    //navigate to home
+    navigate("/");
   }
 
 
@@ -51,10 +49,15 @@ export default function Navbar(props) {
         </div>
         <div className="p-4">
           <h4 className="font-medium text-lg text-white">
-            Hello, {name}
+            {name ?
+              <p>
+                Hello, {name}
+              </p>
+              : ""}
           </h4>
         </div>
-        <button onClick={(e) => Logout(e)} href="#" className="inline-block text-sm px-4 py-2 leading-none border rounded text-white border-white hover:border-transparent hover:text-teal-500 hover:bg-white mt-4 lg:mt-0">Logout</button>
+        {name ? <button onClick={(e) => Logout(e)} href="#" className="inline-block text-sm px-4 py-2 leading-none border rounded text-white border-white hover:border-transparent hover:text-teal-500 hover:bg-white mt-4 lg:mt-0">Logout</button>
+          : ""}
       </div>
     </nav>
 

@@ -1,8 +1,10 @@
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import React, { Component, useEffect, useState } from 'react'
 import axios from 'axios'
 
-export default function Login() {
+export default function Login({ SetName }) {
+
+    let navigate = useNavigate();
 
     const [username, SetUsername] = useState("");
     const [password, SetPassword] = useState("");
@@ -20,21 +22,29 @@ export default function Login() {
         axios
             .post("http://localhost:80/login.php", loginObj)
             .then(response => {
+                //if any message comes back, that means it failed.
                 if (response.data.message) {
-
+                    //just set that message as the response.
                     SetLoginStatus(response.data.message);
-                    console.log("login Status:", loginStatus);
                 }
                 else {
+                    //setting localstorage variables.
                     localStorage.setItem("userName", response.data[0].fname);
                     localStorage.setItem("id", response.data[0].id);
+
+                    //setting state.
+                    SetName(localStorage.getItem("userName"));
                     SetLoginStatus("Successful Login");
+
+                    //re-routing you to homepage.
+                    setTimeout(() => {
+                        navigate("/wishlist");
+                    }, 1000);
                 }
             })
             .catch(function (error) {
                 console.log("axios error in login", error)
             });
-
     }
 
     return (

@@ -1,5 +1,4 @@
-import React, { Component } from 'react';
-
+import React, { Component, useState } from 'react';
 
 import Carousel from "./components/single-product";
 import Home from './components/Home';
@@ -20,17 +19,19 @@ import {
 } from "react-router-dom"
 
 function App() {
+
+  const [name, SetName] = useState("");
+
   return (
     <>
       <div className="App">
-
-        <Navbar />
+        <Navbar SetName={SetName} name={name} />
         <Routes>
           <Route path='/' element={<Home />} />
           <Route path='/productlist' element={<ProductList />} />
           <Route path='/carousel' element={<Carousel />} />
-          <Route path='/login' element={<Login />} />
-          <Route path='/signup' element={<Signup />} />
+          <Route path='/login' element={<Login SetName={SetName} />} />
+          <Route path='/signup' element={<Signup SetName={SetName} />} />
           <Route path='/admin' element={<Admin />} />
           <Route path='/wishlist' element={<WishList />} />
         </Routes>

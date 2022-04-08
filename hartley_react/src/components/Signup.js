@@ -1,11 +1,11 @@
 import { Link } from "react-router-dom";
 import React, { Component, useState } from 'react'
 import axios from 'axios'
+import { useNavigate } from "react-router-dom";
 
-export default function Signup() {
+export default function Signup({ SetName }) {
 
-    localStorage.setItem("test", "testingvalue");
-
+    let navigate = useNavigate();
 
     const [firstName, SetFirstName] = useState("");
     const [lastName, SetLastName] = useState("");
@@ -16,7 +16,6 @@ export default function Signup() {
 
     function HandleSubmit(e) {
 
-
         e.preventDefault();
         const signupObj = {
             'firstname': firstName,
@@ -25,24 +24,27 @@ export default function Signup() {
             'password': password
         }
 
-        console.log(signupObj);
-
         axios
             .post("http://localhost:80/signup.php", signupObj)
             .then(response => {
                 if (response.data == true) {
-                    SetSignup(firstName);
+                    //setting local storage
                     localStorage.setItem("userName", firstName);
-
+                    //setting state
+                    SetName(localStorage.getItem("userName"));
+                    SetSignup(firstName);
+                    //timeout for navigate
+                    setTimeout(() => {
+                        navigate("/productlist");
+                    }, 1000);
                 }
                 else {
                     SetSignup("Please try again");
                 }
             })
             .catch(function (error) {
-                console.log("axios error in login", error)
+                console.log("axios error in signup", error)
             });
-
     }
 
     return (
@@ -56,7 +58,6 @@ export default function Signup() {
                             className="block border border-grey-light w-full p-3 rounded mb-4"
                             id="fullname"
                             placeholder="Full Name"
-                            // value={firstName}
                             onChange={firstName => SetFirstName(firstName.target.value)}
                             required
                         />
@@ -74,7 +75,6 @@ export default function Signup() {
                             className="block border border-grey-light w-full p-3 rounded mb-4"
                             name="email"
                             placeholder="Email"
-                            // value={email}
                             onChange={email => SetEmail(email.target.value)}
                             required />
 
@@ -86,14 +86,12 @@ export default function Signup() {
                             onChange={password => SetPassword(password.target.value)}
                             required />
 
-
                         <div className="mx-auto text-center">
                             <button type='submit' className="bg-indigo-600 hover:bg-indigo-700 text-white font-bold py-2 px-4 rounded">
                                 Sign up
                             </button>
                         </div>
                     </form>
-
 
                     <div className="text-center text-sm text-grey-dark mt-4">
                         By signing up, you agree to the
@@ -112,7 +110,7 @@ export default function Signup() {
                         Log in
                     </Link>.
                 </div>
-                <div><h1 className="text-5xl">{signup}</h1></div>
+                <div>{signup ? <h1 className="text-5xl">Welcome, {signup}</h1> : ""}</div>
             </div>
         </div>
     );
