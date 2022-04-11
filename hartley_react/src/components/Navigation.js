@@ -3,7 +3,7 @@ import {
 } from "react-router-dom";
 import Home from "./Home";
 
-import React, { Component, useState, useEffect } from 'react'
+import React, { Component, useState, useEffect } from 'react';
 import axios from "axios";
 
 export default function Navbar({ name, SetName }) {
