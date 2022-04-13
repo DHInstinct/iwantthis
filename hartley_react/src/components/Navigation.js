@@ -40,9 +40,11 @@ export default function Navbar({ name, SetName }) {
         <div className="text-xl lg:flex-grow">
           <Link to={"/"} className="block mt-4 lg:inline-block lg:mt-0 text-indigo-200 hover:text-white mr-4">Home</Link>
           <Link to={"/productlist"} className="block mt-4 lg:inline-block lg:mt-0 text-indigo-200 hover:text-white mr-4">Product List</Link>
-          <Link to={"/carousel"} className="block mt-4 lg:inline-block lg:mt-0 text-indigo-200 hover:text-white mr-4">Individual</Link>
           <Link to={"/wishlist"} className="block mt-4 lg:inline-block lg:mt-0 text-indigo-200 hover:text-white mr-4">Wishlist</Link>
-          <Link to={"/admin"} className="block mt-4 lg:inline-block lg:mt-0 text-indigo-200 hover:text-white mr-4">Admin</Link>
+          {localStorage.getItem("admin") ?
+            <Link to={"/admin"} className="block mt-4 lg:inline-block lg:mt-0 text-indigo-200 hover:text-white mr-4">Admin</Link>
+            : ""
+          }
           {/* <Link path="/">Home</Link>
           <Link path="/productlist" className="block mt-4 lg:inline-block lg:mt-0 text-indigo-200 hover:text-white mr-4" >Product List</Link>
           <Link path="/Carousel" className="block mt-4 lg:inline-block lg:mt-0 text-indigo-200 hover:text-white mr-4" >Carousel</Link> */}

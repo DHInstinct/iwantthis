@@ -1,4 +1,4 @@
-export default function Carousel(props) {
+export default function SingleProd(props) {
 
   return (
     <div className="bg-white">

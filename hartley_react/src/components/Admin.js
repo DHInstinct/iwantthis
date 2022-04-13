@@ -48,6 +48,9 @@ export default function Admin() {
 
     return (
         <>
+            {/* {if(localStorage.getItem("admin")){
+
+        }} */}
             <div className='container mx-auto pt-10' style={{ height: 500, width: '100%' }}>
                 <DataGrid
                     rows={rows}

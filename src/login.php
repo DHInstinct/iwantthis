@@ -27,6 +27,7 @@ if(isset($request) && !empty($request)){
             $users[$cr]["email"] = $row["u_email"];
             $users[$cr]["password"] = $row["u_pass"];
             $users[$cr]["fname"] = $row["u_fname"];
+            $users[$cr]["admin"] = $row["u_admin"];
             $cr++;
 
         }

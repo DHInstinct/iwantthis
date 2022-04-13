@@ -1,6 +1,6 @@
 import React, { Component, useState } from 'react';
 
-import Carousel from "./components/single-product";
+import SingleProd from "./components/single-product";
 import Home from './components/Home';
 import Navbar from "./components/Navigation";
 import ProductList from './components/product-list';
@@ -29,7 +29,7 @@ function App() {
         <Routes>
           <Route path='/' element={<Home />} />
           <Route path='/productlist' element={<ProductList />} />
-          <Route path='/carousel' element={<Carousel />} />
+          <Route path='/single-prod/:id' element={<SingleProd />} />
           <Route path='/login' element={<Login SetName={SetName} />} />
           <Route path='/signup' element={<Signup SetName={SetName} />} />
           <Route path='/admin' element={<Admin />} />

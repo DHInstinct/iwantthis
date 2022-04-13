@@ -31,6 +31,9 @@ export default function Login({ SetName }) {
                     //setting localstorage variables.
                     localStorage.setItem("userName", response.data[0].fname);
                     localStorage.setItem("id", response.data[0].id);
+                    if (response.data[0].admin == 1) {
+                        localStorage.setItem("admin", response.data[0].admin);
+                    }
 
                     //setting state.
                     SetName(localStorage.getItem("userName"));
