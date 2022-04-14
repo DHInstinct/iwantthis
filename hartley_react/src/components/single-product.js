@@ -1,13 +1,38 @@
+import axios from "axios";
+import { useEffect, useState } from "react";
+import { useParams } from "react-router-dom";
+
 export default function SingleProd(props) {
+
+  let { id } = useParams();
+  const [product, setProduct] = useState();
+
+  function HandleSingleProduct() {
+    axios.get("http://localhost:80/singleprod.php?id=" + id)
+      .then(response => {
+        console.log(response);
+        setProduct(product => (response.data));
+        console.log(product);
+      })
+      .catch(function (error) {
+        console.log("Error getting products", error)
+      })
+
+  }
+
+  useEffect(() => {
+    HandleSingleProduct();
+  }, []);
+
 
   return (
     <div className="bg-white">
       <div className="pt-6">
         <div className="mt-6 max-w-2xl mx-auto sm:px-6 lg:max-w-7xl lg:px-8 lg:grid lg:grid-cols-3 lg:gap-x-8">
-          <div className="hidden aspect-w-3 aspect-h-4 rounded-lg overflow-hidden lg:block">
+          <div className="hidden aspect-w-3 aspect-h-4 rounded-lg overflow-hidden lg:block mx-auto">
             <img src="https://tailwindui.com/img/ecommerce-images/product-page-02-secondary-product-shot.jpg" alt="Two each of gray, white, and black shirts laying flat." className="w-full h-full object-center object-cover"></img>
           </div>
-          <div className="hidden lg:grid lg:grid-cols-1 lg:gap-y-8">
+          {/* <div className="hidden lg:grid lg:grid-cols-1 lg:gap-y-8">
             <div className="aspect-w-3 aspect-h-2 rounded-lg overflow-hidden">
               <img src="https://tailwindui.com/img/ecommerce-images/product-page-02-tertiary-product-shot-01.jpg" alt="Model wearing plain black basic tee." className="w-full h-full object-center object-cover"></img>
             </div>
@@ -17,7 +42,7 @@ export default function SingleProd(props) {
           </div>
           <div className="aspect-w-4 aspect-h-5 sm:rounded-lg sm:overflow-hidden lg:aspect-w-3 lg:aspect-h-4">
             <img src="https://tailwindui.com/img/ecommerce-images/product-page-02-featured-product-shot.jpg" alt="Model wearing plain white basic tee." className="w-full h-full object-center object-cover"></img>
-          </div>
+          </div> */}
         </div>
 
         <div className="max-w-2xl mx-auto pt-10 pb-16 px-4 sm:px-6 lg:max-w-7xl lg:pt-16 lg:pb-24 lg:px-8 lg:grid lg:grid-cols-3 lg:grid-rows-[auto,auto,1fr] lg:gap-x-8">
