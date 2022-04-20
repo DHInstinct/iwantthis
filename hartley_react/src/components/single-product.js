@@ -25,14 +25,16 @@ export default function SingleProd(props) {
   }, [product.id]);
   //checking if the id of that object is different, if it is re render. 
 
-  function DisplayReviews() {
-    for (let i = 0; i < product.review; i++) {
-      return <Reviews />
+  const DisplayReviews = () => {
+    const review = [];
+    for (var i = 0; i < product.review; i++) {
+      review.push(<Reviews key={i} />);
     }
-
+    return review;
   }
 
   return (
+    <>
     <div className="bg-white">
       <div className="pt-6">
         <div className="mt-6 max-w-2xl mx-auto sm:px-6 lg:max-w-7xl lg:px-8 lg:grid lg:grid-cols-3 lg:gap-x-8">
@@ -57,7 +59,7 @@ export default function SingleProd(props) {
                   {DisplayReviews()}
                 </div>
                 <p className="sr-only">4 out of 5 stars</p>
-                <a href="#" className="ml-3 text-sm font-medium text-indigo-600 hover:text-indigo-500">117 reviews</a>
+                <a href="#" className="ml-3 text-sm font-medium text-indigo-600 hover:text-indigo-500">Reviews</a>
               </div>
             </div>
             <form className="mt-10">
@@ -84,6 +86,7 @@ export default function SingleProd(props) {
         </div>
       </div>
     </div>
+  </>
   );
 
 }

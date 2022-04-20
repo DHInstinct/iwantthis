@@ -79,7 +79,7 @@ export default function ProductList() {
 
     let toggle3 = true;
     function FilterMacBooks() {
-        let elementCount = document.getElementsByClassName('category1');
+        let elementCount = document.getElementsByClassName('category3');
         if (toggle3) {
             for (var i = 0; i < elementCount.length; i++) {
                 document.getElementsByClassName('category1')[i].style.visibility = 'hidden';
