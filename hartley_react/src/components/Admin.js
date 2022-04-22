@@ -1,7 +1,38 @@
-
-
 import React from 'react';
+import axios from 'axios';
 import { DataGrid, GridRowsProp, GridColDef } from '@mui/x-data-grid';
+import { useState, useEffect } from 'react';
+import { useSearchParams } from 'react-router-dom';
+
+const FetchUsers = () => {
+    return axios
+    .get("http://localhost:80/adminusers.php")
+    .then(response => {
+        console.log(response)
+        return response
+    })
+    .catch(error => {
+        console.log("Error fetching users", error)
+    })
+}
+
+const FetchUserWishList = () => {
+    /*select 
+ f.fav_id 'ID',
+ w.wl_id 'WishListID',
+ w.u_id 'UserID',
+ w.wl_name 'NameOfWishList',
+ p.p_name 'ProductName',   
+ p.p_price 'Price',
+ p.p_image 'Image'
+from Wish_list w 
+inner join Favorite f on w.wl_id=f.wl_id 
+inner join Product p on f.p_id=p.p_id
+where 'UserID' = 0 */
+
+
+}
+
 
 export default function Admin() {
 
@@ -26,34 +57,31 @@ export default function Admin() {
         },
 
         {
-            field: 'wishlist',
+            field: 'wishlistNames',
             headerName: 'Wish List',
             description: 'To view wishlists here',
+            valueFormatter: (params) => params.value.wishlistname,
             sortable: false,
             width: 160,
+            type: 'string'
+
         }
     ];
 
-    const rows = [
-        { id: 1, lastName: 'Snow', firstName: 'Jon', email: "fake@fakemail.com", wishlist: "view my list here" },
-        { id: 2, lastName: 'Lannister', firstName: 'Cersei', email: "fake@fakemail.com", wishlist: "view my list here" },
-        { id: 3, lastName: 'Lannister', firstName: 'Jaime', email: "fake@fakemail.com", wishlist: "view my list here" },
-        { id: 4, lastName: 'Stark', firstName: 'Arya', email: "fake@fakemail.com", wishlist: "view my list here" },
-        { id: 5, lastName: 'Targaryen', firstName: 'Daenerys', email: "fake@fakemail.com", wishlist: "view my list here" },
-        { id: 6, lastName: 'Melisandre', firstName: null, email: "fake@fakemail.com", wishlist: "view my list here" },
-        { id: 7, lastName: 'Clifford', firstName: 'Ferrara', email: "fake@fakemail.com", wishlist: "view my list here" },
-        { id: 8, lastName: 'Frances', firstName: 'Rossini', email: "fake@fakemail.com", wishlist: "view my list here" },
-        { id: 9, lastName: 'Roxie', firstName: 'Harvey', email: "fake@fakemail.com", wishlist: "view my list here" },
-    ];
+    const [users, setUsers] = useState([])
+
+    useEffect(() =>{
+        FetchUsers().then((data) => {
+        setUsers(data)
+
+    })
+}, []);
 
     return (
         <>
-            {/* {if(localStorage.getItem("admin")){
-
-        }} */}
             <div className='container mx-auto pt-10' style={{ height: 500, width: '100%' }}>
                 <DataGrid
-                    rows={rows}
+                    rows={users.data}
                     columns={columns}
                     pemailSize={7}
                     rowsPerPemailOptions={[5]}
