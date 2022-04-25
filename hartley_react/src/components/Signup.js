@@ -27,9 +27,11 @@ export default function Signup({ SetName }) {
         axios
             .post("http://localhost:80/signup.php", signupObj)
             .then(response => {
-                if (response.data == true) {
+                if (response.data) {
                     //setting local storage
                     localStorage.setItem("userName", firstName);
+                    localStorage.setItem("userid", response.data.id);
+                    localStorage.setItem("wishlistid", response.data.wishlistid);
                     //setting state
                     SetName(localStorage.getItem("userName"));
                     SetSignup(firstName);

@@ -10,8 +10,7 @@ if(isset($request) && !empty($request)){
     $email = $data->username;
     $pass = $data->password;
     
-    $query = "select * from User where u_email='" . $email . "' and u_pass='" . md5($pass) ."'limit 1";
-    // $query = "select * from User";
+    $query = "select * from User u inner join Wish_List wl on u.u_id=wl.u_id inner join Favorite f on wl.wl_id = f.wl_id where u_email='" . $email . "' and u_pass='" . md5($pass) ."'limit 1";
 
     $result = $mysqli->query($query);
 
@@ -28,12 +27,11 @@ if(isset($request) && !empty($request)){
             $users[$cr]["password"] = $row["u_pass"];
             $users[$cr]["fname"] = $row["u_fname"];
             $users[$cr]["admin"] = $row["u_admin"];
+            $users[$cr]["wishlistid"] = $row["wl_id"];
             $cr++;
 
         }
 
-        // $_SESSION['userloginname'] = $users[0]['u_fname'];
-        // $_SESSION['userid'] = $users[0]['u_id'];
         echo json_encode($users);
 
     }

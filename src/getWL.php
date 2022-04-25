@@ -2,6 +2,14 @@
 
 require_once("config/config.php");
 
+$request = file_get_contents("php://input");
+if(isset($request) && !empty($request)){ 
+    
+    $data = json_decode($request);
+
+    $id = $data->id;
+
+
     $query = "select 
     f.fav_id 'ID',
     w.wl_id 'WishListID',
@@ -11,7 +19,8 @@ require_once("config/config.php");
     p.p_image 'Image'
    from Wish_list w 
    inner join Favorite f on w.wl_id=f.wl_id 
-   inner join Product p on f.p_id=p.p_id";
+   inner join Product p on f.p_id=p.p_id
+   where w.u_id={$id}";
     // $query = "select * from User";
 
     $result = $mysqli->query($query);
@@ -43,3 +52,5 @@ require_once("config/config.php");
         echo json_encode($data);        
         return http_response_code(422);
     }
+
+}

@@ -30,7 +30,9 @@ export default function Login({ SetName }) {
                 else {
                     //setting localstorage variables.
                     localStorage.setItem("userName", response.data[0].fname);
-                    localStorage.setItem("id", response.data[0].id);
+                    localStorage.setItem("userid", response.data[0].id);
+                    localStorage.setItem("wishlistid", response.data[0].wishlistid);
+
                     if (response.data[0].admin == 1) {
                         localStorage.setItem("admin", response.data[0].admin);
                     }
@@ -98,7 +100,6 @@ export default function Login({ SetName }) {
             </div>
         </div >
     );
-
 
 }
 
