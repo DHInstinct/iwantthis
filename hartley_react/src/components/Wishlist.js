@@ -31,6 +31,7 @@ const PrintWishlist = (wishlist) => {
         return
     }
     return wishlist.data.map(function (object, i) {
+        console.log(object)
         return <DisplayWishList obj={object} key={i} />
     })
 
